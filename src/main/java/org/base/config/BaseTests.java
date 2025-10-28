@@ -3,6 +3,8 @@ package org.base.config;
 import com.codeborne.selenide.*;
 import org.testng.annotations.*;
 
+import static org.base.helpers.Constants.BASE_URL;
+
 public class BaseTests {
     @BeforeTest
     public void config() {
@@ -24,7 +26,7 @@ public class BaseTests {
     }
     @BeforeMethod
     public void openMainPage() {
-        Selenide.open("https://www.demoblaze.com/");
+        Selenide.open(BASE_URL);
     }
     @AfterMethod
     public void clearWebDriver() {
