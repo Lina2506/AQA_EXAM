@@ -1,6 +1,7 @@
 package org.base.pages;
 
 import org.base.config.PageTools;
+import org.base.helpers.AlertDialogs;
 
 import static com.codeborne.selenide.Condition.*;
 import static org.base.helpers.CustomConditions.*;
@@ -8,7 +9,8 @@ import static org.base.helpers.CustomConditions.*;
 public class SignUpPage extends PageTools {
     private final String usernameInput="//input[@id='sign-username']";
     private final String passwordInput="//input[@id='sign-password']";
-    private final String signUpButton="//button[@id='sign-up-button']";
+    private final String signUpButton="//button[text()='Sign up']";
+
 
     public void typeUsername(String username) {
         should("xpath", inputCondition, usernameInput);
@@ -21,5 +23,13 @@ public class SignUpPage extends PageTools {
     public void clickSignUpButton() {
         should("xpath", clickable, signUpButton);
         click("xpath", signUpButton);
+
+        String alertText = AlertDialogs.getAlertText();
+
+        if (alertText.equals("Sign up successful.")){
+            System.out.println("Sign up successful.");
+        }else if(alertText.equals("This user already exist.")){
+            System.out.println("This user already exist.");
+        }
     }
 }
