@@ -3,7 +3,7 @@ package org.base.config;
 import com.codeborne.selenide.*;
 import org.testng.annotations.*;
 
-import static org.base.helpers.Constants.BASE_URL;
+import static org.base.helpers.Constants.*;
 
 public class BaseTests {
     @BeforeTest

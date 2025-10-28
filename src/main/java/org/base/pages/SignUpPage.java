@@ -10,6 +10,7 @@ public class SignUpPage extends PageTools {
     private final String usernameInput="//input[@id='sign-username']";
     private final String passwordInput="//input[@id='sign-password']";
     private final String signUpButton="//button[text()='Sign up']";
+    private final String closeWindowButton="(//button[@class='close']/span)[2]";
 
 
     public void typeUsername(String username) {
@@ -31,5 +32,12 @@ public class SignUpPage extends PageTools {
         }else if(alertText.equals("This user already exist.")){
             System.out.println("This user already exist.");
         }
+
+        AlertDialogs.acceptAlert();;
+        clickCloseWindowButton();
+    }
+    public void clickCloseWindowButton() {
+        should("xpath", clickable, closeWindowButton);
+        click("xpath", closeWindowButton);
     }
 }
