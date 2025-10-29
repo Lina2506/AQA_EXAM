@@ -4,17 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2e1acb7b-019c-43c1-a76d-000f455a939b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libraries/lombok.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+    <list default="true" id="2e1acb7b-019c-43c1-a76d-000f455a939b" name="Changes" comment="credentials are added in Constants">
       <change afterPath="$PROJECT_DIR$/src/main/java/org/base/Pages.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/testSuite.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/ui/TestTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/base/pages/CartPage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/base/pages/OrderNotification.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/base/pages/OrderPage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/base/pages/ProductPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/base/config/PageTools.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/base/config/PageTools.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/base/helpers/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/base/helpers/Constants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/base/pages/HomePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/base/pages/HomePage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/base/pages/SignUpPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/base/pages/SignUpPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ui/CriticalTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ui/CriticalTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ui/TestTest.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,6 +46,9 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "TestNG./Users/polinamorhun/IdeaProjects/AQA_EXAM/src/main/resources/testSuite.xml.executor": "Run",
+    "TestNG.CriticalTest.executor": "Run",
+    "TestNG.CriticalTest.testBuyItem.executor": "Run",
     "TestNG.TestTest.test.executor": "Run",
     "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
@@ -60,7 +66,42 @@
       <recent name="$PROJECT_DIR$/libraries" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="TestNG.CriticalTest.testBuyItem">
+    <configuration name="CriticalTest" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="AQA_EXAM" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ui.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="ui" />
+      <option name="MAIN_CLASS_NAME" value="ui.CriticalTest" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CriticalTest.testBuyItem" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="AQA_EXAM" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ui.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="ui" />
+      <option name="MAIN_CLASS_NAME" value="ui.CriticalTest" />
+      <option name="METHOD_NAME" value="testBuyItem" />
+      <option name="TEST_OBJECT" value="METHOD" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="TestTest.test" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="AQA_EXAM" />
       <extension name="coverage">
@@ -79,8 +120,21 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="/Users/polinamorhun/IdeaProjects/AQA_EXAM/src/main/resources/testSuite.xml" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="AQA_EXAM" />
+      <option name="SUITE_NAME" value="$PROJECT_DIR$/src/main/resources/testSuite.xml" />
+      <option name="TEST_OBJECT" value="SUITE" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="TestNG.CriticalTest.testBuyItem" />
+        <item itemvalue="TestNG.CriticalTest" />
+        <item itemvalue="TestNG./Users/polinamorhun/IdeaProjects/AQA_EXAM/src/main/resources/testSuite.xml" />
         <item itemvalue="TestNG.TestTest.test" />
       </list>
     </recent_temporary>
@@ -101,11 +155,78 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1761563714794</updated>
-      <workItem from="1761563715791" duration="2264000" />
+      <workItem from="1761563715791" duration="54773000" />
     </task>
+    <task id="LOCAL-00001" summary="AQA_EXAM project is created. The main dependencies have been added to pom.xml">
+      <option name="closed" value="true" />
+      <created>1761577049917</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1761577049917</updated>
+    </task>
+    <task id="LOCAL-00002" summary="create class BaseTests">
+      <option name="closed" value="true" />
+      <created>1761579626398</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1761579626398</updated>
+    </task>
+    <task id="LOCAL-00003" summary="create models for User and Product">
+      <option name="closed" value="true" />
+      <created>1761638002507</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1761638002507</updated>
+    </task>
+    <task id="LOCAL-00004" summary="create classes: SignUpPage, PageTools,CustomConditions, HomePage, Constants. change BaseTests(put the BASE_URL in constats)">
+      <option name="closed" value="true" />
+      <created>1761649666253</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1761649666253</updated>
+    </task>
+    <task id="LOCAL-00005" summary="create AlertDialogs class">
+      <option name="closed" value="true" />
+      <created>1761659811232</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1761659811232</updated>
+    </task>
+    <task id="LOCAL-00006" summary="create LogInPage, tested CriticalTest (tests passed)">
+      <option name="closed" value="true" />
+      <created>1761670118387</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1761670118387</updated>
+    </task>
+    <task id="LOCAL-00007" summary="credentials are added in Constants">
+      <option name="closed" value="true" />
+      <created>1761722952548</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1761722952549</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="AQA_EXAM project is created. The main dependencies have been added to pom.xml" />
+    <MESSAGE value="create class BaseTests" />
+    <MESSAGE value="create models for User and Product" />
+    <MESSAGE value="create classes: SignUpPage, PageTools,CustomConditions, HomePage, Constants. change BaseTests(put the BASE_URL in constats)" />
+    <MESSAGE value="create AlertDialogs class" />
+    <MESSAGE value="create LogInPage, tested CriticalTest (tests passed)" />
+    <MESSAGE value="credentials are added in Constants" />
+    <option name="LAST_COMMIT_MESSAGE" value="credentials are added in Constants" />
   </component>
 </project>

@@ -5,9 +5,9 @@ public class Constants {
     public static final String USERNAME="Polina_test";
     public static final String PASSWORD="Polina_test";
     public static final String ORDER_NAME="Polina";
-    public static final String OTDER_Country="Ukraine";
-    public static final String OTDER_City="Kyiv";
-    public static final String OTDER_Creditcard="12345678";
-    public static final String OTDER_Month="september";
-    public static final String OTDER_Year="2025";
+    public static final String ORDER_COUNTRY="Ukraine";
+    public static final String ORDER_CITY="Kyiv";
+    public static final String ORDER_CREDITCARD="12345678";
+    public static final String ORDER_MONTH="september";
+    public static final String ORDER_YEAR="2025";
 }

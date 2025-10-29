@@ -1,5 +1,6 @@
 package org.base.pages;
 
+import com.codeborne.selenide.Selenide;
 import org.base.config.PageTools;
 import org.base.helpers.AlertDialogs;
 
@@ -9,8 +10,8 @@ import static org.base.helpers.CustomConditions.*;
 public class SignUpPage extends PageTools {
     private final String usernameInput="//input[@id='sign-username']";
     private final String passwordInput="//input[@id='sign-password']";
-    private final String signUpButton="//button[text()='Sign up']";
-    private final String closeWindowButton="(//button[@class='close']/span)[2]";
+    private String signUpButton="//button[text()='Sign up']";
+    private String closeWindowButton="(//button[@class='close']/span)[2]";
 
 
     public void typeUsername(String username) {
@@ -25,15 +26,7 @@ public class SignUpPage extends PageTools {
         should("xpath", clickable, signUpButton);
         click("xpath", signUpButton);
 
-        String alertText = AlertDialogs.getAlertText();
-
-        if (alertText.equals("Sign up successful.")){
-            System.out.println("Sign up successful.");
-        }else if(alertText.equals("This user already exist.")){
-            System.out.println("This user already exist.");
-        }
-
-        AlertDialogs.acceptAlert();;
+        String alertText = Selenide.confirm("This user already exist.");
         clickCloseWindowButton();
     }
     public void clickCloseWindowButton() {

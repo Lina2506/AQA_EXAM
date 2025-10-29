@@ -1,16 +1,17 @@
 package org.base.config;
 
-import com.codeborne.selenide.WebElementCondition;
+import com.codeborne.selenide.*;
 
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
 
 public class PageTools {
-    public String locatorFormatter(String locator, Object... args ) {
+    public String locatorFormatter(String locator, Object... args) {
         return String.format(locator, args);
     }
+
     public void should(String locatorType, WebElementCondition condition, String locator, Object... args) {
-        switch (locatorType){
+        switch (locatorType) {
             case "xpath":
                 $(byXpath(locatorFormatter(locator, args))).shouldBe(condition);
                 break;
@@ -21,8 +22,9 @@ public class PageTools {
                 throw new IllegalArgumentException("Invalid locator type: " + locatorType);
         }
     }
+
     public void type(String locatorType, String text, String locator, Object... args) {
-        switch (locatorType){
+        switch (locatorType) {
             case "xpath":
                 $(byXpath(locatorFormatter(locator, args))).append(text);
                 break;
@@ -33,14 +35,71 @@ public class PageTools {
                 throw new IllegalArgumentException("Invalid locator type: " + locatorType);
         }
     }
+
     public void click(String locatorType, String locator, Object... args) {
-        switch (locatorType){
+        switch (locatorType) {
             case "xpath":
                 $(byXpath(locatorFormatter(locator, args))).click();
                 break;
             case "css":
                 $(byCssSelector(locatorFormatter(locator, args))).click();
                 break;
+            default:
+                throw new IllegalArgumentException("Invalid locator type: " + locatorType);
+        }
+    }
+
+    public void shouldCollection(String locatorType, WebElementsCondition condition, String locator, Object... args) {
+        switch (locatorType) {
+            case "xpath":
+                $$(byXpath(locatorFormatter(locator, args))).shouldBe(condition);
+                break;
+            case "css":
+                $$(byCssSelector(locatorFormatter(locator, args))).shouldBe(condition);
+                break;
+            default:
+                throw new IllegalArgumentException("Invalid locator type: " + locatorType);
+        }
+    }
+
+    public ElementsCollection getElements(String locatorType, String locator, Object... args) {
+        switch (locatorType) {
+            case "xpath":
+                return $$(byXpath(locatorFormatter(locator, args)));
+            case "css":
+                return $$(byCssSelector(locatorFormatter(locator, args)));
+            default:
+                throw new IllegalArgumentException("Invalid locator type: " + locatorType);
+        }
+    }
+
+    public String getText(String locatorType, String locator, Object... args) {
+        switch (locatorType) {
+            case "xpath":
+                return $(byXpath(locatorFormatter(locator, args))).getText();
+            case "css":
+                return $(byCssSelector(locatorFormatter(locator, args))).getText();
+            default:
+                throw new IllegalArgumentException("Invalid locator type: " + locatorType);
+        }
+    }
+
+    public boolean isCondition(String locatorType, WebElementCondition condition, String locator, Object... args) {
+        switch (locatorType) {
+            case "xpath":
+                return $(byXpath(locatorFormatter(locator, args))).is(condition);
+            case "css":
+                return $(byCssSelector(locatorFormatter(locator, args))).is(condition);
+            default:
+                throw new IllegalArgumentException("Invalid locator type: " + locatorType);
+        }
+    }
+    public SelenideElement getElement (String locatorType, String locator, Object... args) {
+        switch (locatorType) {
+            case "xpath":
+                return $(byXpath(locatorFormatter(locator, args)));
+            case "css":
+                return $(byCssSelector(locatorFormatter(locator, args)));
             default:
                 throw new IllegalArgumentException("Invalid locator type: " + locatorType);
         }
