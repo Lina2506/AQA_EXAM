@@ -20,7 +20,7 @@ public class OrderNotification extends PageTools {
 
     }
     public void clickConfirmButton() {
-        should("xpath", visible, confirmButton);
+        should("xpath", visible, confirmButton, Duration.ofSeconds(10));
         click("xpath", confirmButton);
     }
 }

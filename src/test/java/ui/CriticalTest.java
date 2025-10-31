@@ -1,5 +1,6 @@
 package ui;
 
+import com.codeborne.selenide.Selenide;
 import org.base.config.BaseTests;
 import org.testng.annotations.Test;
 
@@ -35,6 +36,8 @@ public class CriticalTest extends BaseTests {
         orderPage().typeOrderMonthInput(ORDER_MONTH);
         orderPage().typeOrderYearInput(ORDER_YEAR);
         orderPage().clickPurchaseButton();
+
+        Selenide.sleep(5000);
 
         orderNotification().verifyCompleteHeaderVisiable("Thank you for your purchase!");
         orderNotification().clickConfirmButton();
