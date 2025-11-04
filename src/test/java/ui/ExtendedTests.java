@@ -8,45 +8,48 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-import static com.codeborne.selenide.Selectors.byXpath;
-import static com.codeborne.selenide.Selenide.$;
 import static org.base.Pages.*;
 
 public class ExtendedTests extends BaseTests {
-    @Test
+    @Test(description = "Verify that the user can navigate through the website and successfully perform cart operations")
     public void extendedTest() {
-//_________________NavigationMenuTest__________________________
+//_________________NavigationMenu__________________________
         homePage().clickContactButtonInNavigationMenu();
         Selenide.sleep(2000);
         contactWindow().clickCloseButtonInContactWindow();
+
         homePage().clickAboutUsButtonInNavigationMenu();
         Selenide.sleep(2000);
         aboutUsWindow().clickCloseButtonInAboutUsWindow();
-//_________________SwitchBetweenCategories________________________
+//_________________CategoryValidation________________________
         List<String> expectedCategories = List.of("Phones", "Laptops", "Monitors");
-        List<String> actualCategories = homePage().getCategoryNames();
-        Assert.assertEquals(actualCategories, expectedCategories);
-//_________________AddToCartFewProductsAndVerifyDetailsTest____________________
-        List<Product> productList = homePage().getProductList();
+        Assert.assertEquals(homePage().getCategoryNames(), expectedCategories);
+//_________________AddTwoProductsToCart____________________
+        List<Product>allProducts = homePage().getProductList();
+
         homePage().clickOnProductByName("Samsung galaxy s6");
-        Product detailedProduct = detailProductPage().getDetailProduct();
-
-        Assert.assertTrue(productList.contains(detailedProduct), "List " + productList + " doesn't contain " + detailedProduct);
-
+        Product firstProduct = detailProductPage().getDetailProduct();
+        Assert.assertTrue(allProducts.contains(firstProduct), "List"+ allProducts + " doesn't contain " + firstProduct);
         productPage().clickAddToCartButton();
+
         homePage().clickHomeButtonInNavigationMenu();
 
         homePage().clickOnProductByName("Nexus 6");
-
-        Assert.assertTrue(productList.contains(detailedProduct), "List " + productList + " doesn't contain " + detailedProduct);
-
+        Product secondProduct = detailProductPage().getDetailProduct();
+        Assert.assertTrue(allProducts.contains(secondProduct), "List"+ allProducts + " doesn't contain " + secondProduct);
         productPage().clickAddToCartButton();
 
         homePage().clickCartButtonInNavigationMenu();
 //______________________CheckTotalSumTest______________________
-
+        int expectedSum=firstProduct.getPrice()+secondProduct.getPrice();
+        int actualSum= cartPage().getTotalPrice();
+        Assert.assertEquals(actualSum, expectedSum, "Total sum in cart is incorrect");
 //______________________DeleteOneProductTest____________________
-
-
+        cartPage().deleteProductByName(firstProduct.getName());
+        Selenide.sleep(2000);
+        int remainingTotal=cartPage().getTotalPrice();
+        Assert.assertEquals(remainingTotal, secondProduct.getPrice(), "Total sum in cart is incorrect");
+//___________________ReturnHomePage____________________________
+        homePage().clickHomeButtonInNavigationMenu();
     }
 }

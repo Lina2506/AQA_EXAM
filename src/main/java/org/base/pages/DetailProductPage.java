@@ -2,7 +2,6 @@ package org.base.pages;
 
 import org.base.config.PageTools;
 import org.base.models.Product;
-import org.openqa.selenium.WebDriver;
 
 public class DetailProductPage extends PageTools {
     private final String name="//h2[@class='name']";
@@ -18,6 +17,4 @@ public class DetailProductPage extends PageTools {
 
         return product;
     }
-
-
 }

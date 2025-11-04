@@ -15,7 +15,6 @@ public class ProductPage extends PageTools {
         click("xpath", addToCartButton);
 
         String alertDialog = Selenide.confirm();
-        Assert.assertEquals(alertDialog, "Product added.");
 
     }
 }

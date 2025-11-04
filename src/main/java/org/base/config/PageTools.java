@@ -2,6 +2,8 @@ package org.base.config;
 
 import com.codeborne.selenide.*;
 
+import java.util.List;
+
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
 
@@ -84,22 +86,23 @@ public class PageTools {
         }
     }
 
-    public boolean isCondition(String locatorType, WebElementCondition condition, String locator, Object... args) {
-        switch (locatorType) {
-            case "xpath":
-                return $(byXpath(locatorFormatter(locator, args))).is(condition);
-            case "css":
-                return $(byCssSelector(locatorFormatter(locator, args))).is(condition);
-            default:
-                throw new IllegalArgumentException("Invalid locator type: " + locatorType);
-        }
-    }
-    public SelenideElement getElement (String locatorType, String locator, Object... args) {
+    public SelenideElement getElement(String locatorType, String locator, Object... args) {
         switch (locatorType) {
             case "xpath":
                 return $(byXpath(locatorFormatter(locator, args)));
             case "css":
                 return $(byCssSelector(locatorFormatter(locator, args)));
+            default:
+                throw new IllegalArgumentException("Invalid locator type: " + locatorType);
+        }
+    }
+
+    public List<String> getElementsText(String locatorType, String locator, Object... args) {
+        switch (locatorType) {
+            case "xpath":
+                return $$(byXpath(locatorFormatter(locator, args))).texts();
+            case "css":
+                return $$(byCssSelector(locatorFormatter(locator, args))).texts();
             default:
                 throw new IllegalArgumentException("Invalid locator type: " + locatorType);
         }

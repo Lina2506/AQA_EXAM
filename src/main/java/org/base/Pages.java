@@ -10,6 +10,9 @@ public class Pages {
    private static CartPage cartPage;
    private static OrderPage orderPage;
    private static OrderNotification orderNotification;
+   private static ContactWindow contactWindow;
+   private static AboutUsWindow aboutUsWindow;
+   private static DetailProductPage detailProductPage;
 
 
    public static HomePage homePage() {
@@ -53,5 +56,23 @@ public class Pages {
            orderNotification = new OrderNotification();
        }
        return orderNotification;
+    }
+    public static ContactWindow contactWindow() {
+       if(contactWindow == null) {
+           contactWindow = new ContactWindow();
+       }
+       return contactWindow;
+    }
+    public static AboutUsWindow aboutUsWindow() {
+       if(aboutUsWindow == null) {
+           aboutUsWindow = new AboutUsWindow();
+       }
+       return aboutUsWindow;
+    }
+    public static DetailProductPage detailProductPage() {
+       if(detailProductPage == null) {
+           detailProductPage = new DetailProductPage();
+       }
+       return detailProductPage;
     }
     }
