@@ -14,7 +14,6 @@ public class ProductPage extends PageTools {
         should("xpath", clickable, addToCartButton);
         click("xpath", addToCartButton);
 
-        String alertDialog = Selenide.confirm();
-
+        AlertDialogs.verifyAlertText("Product added");
     }
 }
