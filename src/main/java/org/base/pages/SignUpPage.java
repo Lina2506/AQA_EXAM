@@ -1,6 +1,5 @@
 package org.base.pages;
 
-import com.codeborne.selenide.Selenide;
 import org.base.config.PageTools;
 import org.base.helpers.AlertDialogs;
 
@@ -26,7 +25,17 @@ public class SignUpPage extends PageTools {
         should("xpath", clickable, signUpButton);
         click("xpath", signUpButton);
 
-        String alertText = Selenide.confirm("This user already exist.");
+        String alertText = AlertDialogs.getAlertText();
+
+        if (alertText.equals("Sing up successful.")){
+            AlertDialogs.acceptAlert();
+            System.out.println("Registration successful.");
+        } else if (alertText.equals("This user already exist.")){
+            AlertDialogs.acceptAlert();
+            System.out.println("User already exist.");
+        }else{
+            throw new AssertionError(alertText);
+        }
         clickCloseWindowButton();
     }
     public void clickCloseWindowButton() {
