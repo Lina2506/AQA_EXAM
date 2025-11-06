@@ -7,7 +7,6 @@ import org.base.models.Product;
 import java.util.*;
 
 import static com.codeborne.selenide.Condition.*;
-import static org.base.Pages.detailProductPage;
 
 public class HomePage extends PageTools {
     private String homeButtonInNavigationMenu="//div[@id='navbarExample']//a[text()='Home ']";
@@ -89,3 +88,4 @@ public class HomePage extends PageTools {
         return productList;
     }
 }
+

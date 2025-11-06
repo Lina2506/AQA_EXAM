@@ -22,5 +22,4 @@ public class LogInPage extends PageTools {
         should("xpath", clickable, loginButton);
         click("xpath", loginButton);
     }
-
 }
