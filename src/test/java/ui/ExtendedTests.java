@@ -11,7 +11,7 @@ import java.util.List;
 import static org.base.Pages.*;
 
 public class ExtendedTests extends BaseTests {
-    @Test(groups = "extended", description = "Verify that the user can navigate through the website and successfully perform cart operations")
+    @Test(description = "Verify that the user can navigate through the website and successfully perform cart operations")
     public void extendedTest() {
 //_________________NavigationMenu__________________________
         homePage().clickContactButtonInNavigationMenu();

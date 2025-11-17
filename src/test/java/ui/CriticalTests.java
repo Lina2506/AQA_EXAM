@@ -10,7 +10,7 @@ import static org.base.Pages.*;
 import static org.base.helpers.Constants.*;
 
 public class CriticalTests extends BaseTests {
-    @Test(groups = "critical", description = "Verify user is able to buy item test")
+    @Test(description = "Verify user is able to buy item test")
     public void testBuyItem() {
 //____________________SignUp__________________________________
         homePage().clickSignUpButtonInNavigationMenu();

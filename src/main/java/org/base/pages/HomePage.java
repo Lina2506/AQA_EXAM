@@ -43,6 +43,9 @@ public class HomePage extends PageTools {
         should("css", clickable, logInButtonInNavigationMenu);
         click("css", logInButtonInNavigationMenu);
     }
+    public void assertLoginButtonVisible() {
+        should("css", visible, logInButtonInNavigationMenu);
+    }
     public ElementsCollection getProducts(){
         shouldCollection("xpath", CollectionCondition.size(9), productNames);
         return getElements("xpath", productNames);
