@@ -14,7 +14,7 @@ public class ApiSystemTest {
     @Test(description = "Verify that user can be created, authenticated and retrieved by token")
     public void createAndGetUser() {
 //___________________CreatedUserTest_______________________
-        String username="PolinaTest";
+        String username="PolinaTest"+ (System.currentTimeMillis() % 100000);
         String password="Aqa12345!";
 
         CreateUserResponse createUser = ApiUserHelper.createUser(username,password);
