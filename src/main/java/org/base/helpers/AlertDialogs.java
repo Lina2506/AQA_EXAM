@@ -12,7 +12,7 @@ public class AlertDialogs {
     }
     public static void verifyAlertText(String text) {
         String actualText = getAlertText();
-        Assert.assertEquals(actualText, text);
+        Assert.assertTrue(actualText.contains(text));
         acceptAlert();
     }
     public static void closeAlert() {

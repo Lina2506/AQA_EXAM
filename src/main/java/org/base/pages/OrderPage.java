@@ -1,17 +1,10 @@
 package org.base.pages;
 
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Selenide;
-import com.codeborne.selenide.SelenideElement;
 import org.base.config.PageTools;
-import org.openqa.selenium.By;
 
 import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selectors.byXpath;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$x;
 import static org.base.helpers.CustomConditions.*;
 
 public class OrderPage extends PageTools {

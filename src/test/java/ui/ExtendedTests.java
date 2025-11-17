@@ -11,11 +11,12 @@ import java.util.List;
 import static org.base.Pages.*;
 
 public class ExtendedTests extends BaseTests {
-    @Test(description = "Verify that the user can navigate through the website and successfully perform cart operations")
+    @Test(groups = "extended", description = "Verify that the user can navigate through the website and successfully perform cart operations")
     public void extendedTest() {
 //_________________NavigationMenu__________________________
         homePage().clickContactButtonInNavigationMenu();
         Selenide.sleep(2000);
+        contactWindow().verifyContactWindowTitle("New message");
         contactWindow().clickCloseButtonInContactWindow();
 
         homePage().clickAboutUsButtonInNavigationMenu();
@@ -40,11 +41,11 @@ public class ExtendedTests extends BaseTests {
         productPage().clickAddToCartButton();
 
         homePage().clickCartButtonInNavigationMenu();
-//______________________CheckTotalSumTest______________________
+//______________________CheckTotalSum______________________
         int expectedSum=firstProduct.getPrice()+secondProduct.getPrice();
         int actualSum= cartPage().getTotalPrice();
         Assert.assertEquals(actualSum, expectedSum, "Total sum in cart is incorrect");
-//______________________DeleteOneProductTest____________________
+//______________________DeleteOneProduct____________________
         cartPage().deleteProductByName(firstProduct.getName());
         Selenide.sleep(2000);
         int remainingTotal=cartPage().getTotalPrice();

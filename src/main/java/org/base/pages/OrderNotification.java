@@ -1,12 +1,11 @@
 package org.base.pages;
 
-import com.codeborne.selenide.conditions.Visible;
 import org.base.config.PageTools;
 import org.testng.Assert;
 
 import java.time.Duration;
 
-import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Condition.*;
 
 public class OrderNotification extends PageTools {
     private final String completeHeader="//h2[text()='Thank you for your purchase!']";

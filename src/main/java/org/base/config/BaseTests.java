@@ -1,36 +1,41 @@
 package org.base.config;
 
 import com.codeborne.selenide.*;
+import com.codeborne.selenide.logevents.SelenideLogger;
+import com.codeborne.selenide.testng.TextReport;
+import io.qameta.allure.selenide.AllureSelenide;
 import org.testng.annotations.*;
 
 import static org.base.helpers.Constants.*;
 
+@Listeners(TextReport.class)
 public class BaseTests {
     @BeforeTest
     public void config() {
         Configuration.browser = "chrome";
         Configuration.browserSize = "1024x768";
-        Configuration.holdBrowserOpen = true;
+        Configuration.holdBrowserOpen = false;
         Configuration.headless = false;
         Configuration.timeout = 10000;
         Configuration.savePageSource = false;
         Configuration.screenshots = true;
-    }
-    @BeforeSuite
-    public void createUserBeforeSuite() {
 
-    }
-    @AfterSuite
-    public void deleteUserAfterSuite() {
-
+        SelenideLogger.addListener("AllureSelenide", new AllureSelenide()
+                .screenshots(true)
+                .savePageSource(false)
+                .includeSelenideSteps(true)
+        );
     }
     @BeforeMethod
-    public void openMainPage() {
+    public void openMainPage(){
         Selenide.open(BASE_URL);
     }
+    //реєстрація юзера
     @AfterMethod
     public void clearWebDriver() {
-//        Selenide.clearBrowserCookies();
+      Selenide.clearBrowserCookies();
+      Selenide.clearBrowserLocalStorage();
+      Selenide.refresh();
     }
 
     @AfterTest

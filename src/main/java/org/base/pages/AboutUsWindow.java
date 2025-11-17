@@ -2,7 +2,7 @@ package org.base.pages;
 
 import org.base.config.PageTools;
 
-import static com.codeborne.selenide.Condition.clickable;
+import static com.codeborne.selenide.Condition.*;
 
 public class AboutUsWindow extends PageTools {
     private String closeButtonInAboutUsWindow="//div[@id='videoModal']//button[text()='Close']";
