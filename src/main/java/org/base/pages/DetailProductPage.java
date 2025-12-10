@@ -15,13 +15,12 @@ public class DetailProductPage extends PageTools {
         getElement("xpath", name).shouldBe(Condition.visible);
         getElement("xpath", price).shouldBe(Condition.visible);
 
-        String nameText=getText("xpath", name);
-        String priceText=getText("xpath", price).replace("$","").replaceAll("[^0-9]","").trim();
-        String descriptionText=getText("xpath", description);
-
-        product.setName(nameText);
-        product.setPrice(Integer.parseInt(priceText));
-        product.setDescription(descriptionText);
+        product.setName(getText("xpath", name));
+        product.setPrice(Integer.parseInt(getText("xpath", price)
+                .replace("$","")
+                .replaceAll("[^0-9]","")
+                .trim()));
+        product.setDescription(getText("xpath", description));
 
         return product;
     }

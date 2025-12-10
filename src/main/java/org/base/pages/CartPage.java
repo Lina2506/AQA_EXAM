@@ -20,8 +20,7 @@ public class CartPage extends PageTools {
         SelenideElement totalElement=getElement("xpath", totalPrice);
         totalElement.shouldBe(Condition.visible);
         totalElement.shouldNotBe(Condition.exactText(""));
-        String totalText=getText("xpath",totalPrice);
-        return Integer.parseInt(totalText);
+        return Integer.parseInt(getText("xpath",totalPrice));
     }
     public void deleteProductByName(String productName) {
         ElementsCollection names = getProductNames();
