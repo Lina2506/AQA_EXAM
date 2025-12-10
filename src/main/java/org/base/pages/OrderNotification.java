@@ -11,12 +11,9 @@ public class OrderNotification extends PageTools {
     private final String completeHeader="//h2[text()='Thank you for your purchase!']";
     private String confirmButton="//button[@class='confirm btn btn-lg btn-primary']";
 
-    public void verifyCompleteHeaderVisiable(String message) {
+    public String getCompleteHeaderText() {
         should("xpath", visible, completeHeader);
-        String actualMessage = getText("xpath", completeHeader);
-
-        Assert.assertEquals(actualMessage, message, "Message do not match");
-
+        return getText("xpath", completeHeader);
     }
     public void clickConfirmButton() {
         should("xpath", visible, confirmButton, Duration.ofSeconds(10));

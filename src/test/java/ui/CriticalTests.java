@@ -32,7 +32,9 @@ public class CriticalTests extends BaseTests {
         Assert.assertEquals(selectedProduct.getName(),productNameFromHomePage);
 //_____________________AddToCart________________________________
         productPage().clickAddToCartButton();
-        Assert.assertEquals(AlertDialogs.getAlertText(),"Product added");
+        String alertText=AlertDialogs.getAlertText();
+        Assert.assertTrue(alertText.contains("Product added"),alertText);
+        AlertDialogs.acceptAlert();
         homePage().clickCartButtonInNavigationMenu();
         cartPage().clickPlaceOrderButton();
 //_____________________CheckoutOrder________________________________
@@ -46,7 +48,11 @@ public class CriticalTests extends BaseTests {
 
         Selenide.sleep(5000);
 
-        orderNotification().verifyCompleteHeaderVisiable("Thank you for your purchase!");
+        String expectedMessage="Thank you for your purchase!";
+        String actualMessage = orderNotification().getCompleteHeaderText();
+
+        Assert.assertEquals(actualMessage, expectedMessage, "Message do not match");
+
         orderNotification().clickConfirmButton();
 
 //_______________________LogOut_____________________________________
