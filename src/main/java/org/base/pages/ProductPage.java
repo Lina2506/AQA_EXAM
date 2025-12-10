@@ -11,8 +11,5 @@ public class ProductPage extends PageTools {
     public void clickAddToCartButton() {
         should("xpath", clickable, addToCartButton);
         click("xpath", addToCartButton);
-
-
-        AlertDialogs.verifyAlertText("Product added");
     }
 }

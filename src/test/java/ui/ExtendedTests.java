@@ -2,6 +2,7 @@ package ui;
 
 import com.codeborne.selenide.Selenide;
 import org.base.config.BaseTests;
+import org.base.helpers.AlertDialogs;
 import org.base.models.Product;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -33,6 +34,7 @@ public class ExtendedTests extends BaseTests {
         Product firstProduct = detailProductPage().getDetailProduct();
         Assert.assertTrue(allProducts.contains(firstProduct), "List"+ allProducts + " doesn't contain " + firstProduct);
         productPage().clickAddToCartButton();
+        Assert.assertEquals(AlertDialogs.getAlertText(),"Product added");
 
         homePage().clickHomeButtonInNavigationMenu();
 
@@ -40,6 +42,7 @@ public class ExtendedTests extends BaseTests {
         Product secondProduct = detailProductPage().getDetailProduct();
         Assert.assertTrue(allProducts.contains(secondProduct), "List"+ allProducts + " doesn't contain " + secondProduct);
         productPage().clickAddToCartButton();
+        Assert.assertEquals(AlertDialogs.getAlertText(),"Product added");
 
         homePage().clickCartButtonInNavigationMenu();
 //______________________CheckTotalSum______________________

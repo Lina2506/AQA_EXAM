@@ -2,6 +2,7 @@ package ui;
 
 import com.codeborne.selenide.Selenide;
 import org.base.config.BaseTests;
+import org.base.helpers.AlertDialogs;
 import org.base.models.Product;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -31,6 +32,7 @@ public class CriticalTests extends BaseTests {
         Assert.assertEquals(selectedProduct.getName(),productNameFromHomePage);
 //_____________________AddToCart________________________________
         productPage().clickAddToCartButton();
+        Assert.assertEquals(AlertDialogs.getAlertText(),"Product added");
         homePage().clickCartButtonInNavigationMenu();
         cartPage().clickPlaceOrderButton();
 //_____________________CheckoutOrder________________________________
