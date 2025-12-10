@@ -16,7 +16,8 @@ public class ExtendedTests extends BaseTests {
 //_________________NavigationMenu__________________________
         homePage().clickContactButtonInNavigationMenu();
         Selenide.sleep(2000);
-        contactWindow().verifyContactWindowTitle("New message");
+
+        Assert.assertEquals(contactWindow().getContactWindowTitle(),"New message");
         contactWindow().clickCloseButtonInContactWindow();
 
         homePage().clickAboutUsButtonInNavigationMenu();
