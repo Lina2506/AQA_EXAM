@@ -23,7 +23,6 @@ public class ApiUserHelper {
                         .when()
                         .post()
                         .then()
-                        .log().all()
                         .extract()
                         .as(CreateUserResponse.class);
     }
@@ -40,7 +39,6 @@ public class ApiUserHelper {
                         .when()
                         .post()
                         .then()
-                        .log().all()
                         .extract()
                         .as(AuthResponse.class);
     }
