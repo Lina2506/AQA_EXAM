@@ -1,6 +1,7 @@
 package api;
 
 import org.base.helpers.ApiUserHelper;
+import org.base.helpers.TestDataForAPITests;
 import org.base.pojos.authMe.AuthMeResponse;
 import org.base.pojos.authUser.AuthResponse;
 import org.base.pojos.createUser.*;
@@ -14,8 +15,8 @@ public class ApiSystemTest {
     @Test(description = "Verify that user can be created, authenticated and retrieved by token")
     public void createAndGetUser() {
 //___________________CreatedUserTest_______________________
-        String username="PolinaTest";
-        String password="Aqa12345!";
+        String username= TestDataForAPITests.generateUsername();
+        String password=TestDataForAPITests.DEFAULT_PASSWORD;
 
         CreateUserResponse createUser = ApiUserHelper.createUser(username,password);
 

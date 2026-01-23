@@ -1,12 +1,9 @@
 package org.base.pojos.authMe;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import lombok.*;
-import org.base.helpers.dataDeserializer.DataDeserializer;
 
-import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor

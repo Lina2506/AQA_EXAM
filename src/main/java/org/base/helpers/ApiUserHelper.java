@@ -11,7 +11,7 @@ public class ApiUserHelper {
 
 //_____________CREATE USER____________________
     public static CreateUserResponse createUser(String username, String password) {
-        getSpecifications(requestSpecification(ApiEndpoints.USERS),responseSpecification(201));
+        getSpecifications(requestSpecification(ApiEndpoints.USERS), responseSpecification(201));
 
         CreateUserRequest createUserRequest = new CreateUserRequest();
 
