@@ -47,7 +47,7 @@ public class OrderPage extends PageTools {
     }
 
     public void clickPurchaseButton() {
-        should("xpath", clickable, purchaseButton, Duration.ofSeconds(10));
+        should("xpath", clickable, Duration.ofSeconds(10), purchaseButton);
         click("xpath", purchaseButton);
     }
 
