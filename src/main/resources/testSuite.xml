@@ -1,14 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="AQA_EXAM suite">
-    <test name="UI Test">
-        <packages>
-            <package name="ui"/>
-        </packages>
+    <!--Critical Tests Suite-->
+    <test name="Critical UI Tests" preserve-order="true">
+        <groups>
+            <run>
+                <include name="critical"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="ui.CriticalTests"/>
+        </classes>
     </test>
-    <test name="API Test">
-        <packages>
-            <package name="api"/>
-        </packages>
+    <!-- Extended Tests Suite -->
+    <test name="Extended UI Tests" preserve-order="true">
+        <groups>
+            <run>
+                <include name="extended"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="ui.ExtendedTests"/>
+        </classes>
+    </test>
+
+    <!-- API Tests Suite -->
+    <test name="API Test" preserve-order="true">
+        <groups>
+            <run>
+                <include name="api"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="api.ApiSystemTest"/>
+        </classes>
     </test>
 </suite>
