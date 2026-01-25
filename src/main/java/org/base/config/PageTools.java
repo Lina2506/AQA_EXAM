@@ -2,6 +2,7 @@ package org.base.config;
 
 import com.codeborne.selenide.*;
 
+import java.time.Duration;
 import java.util.List;
 
 import static com.codeborne.selenide.Selectors.*;
@@ -11,8 +12,10 @@ public class PageTools {
     public String locatorFormatter(String locator, Object... args) {
         return String.format(locator, args);
     }
-
     public void should(String locatorType, WebElementCondition condition, String locator, Object... args) {
+        should(locatorType, condition, Duration.ofSeconds(10), locator, args);
+    }
+    public void should(String locatorType, WebElementCondition condition, Duration timeout, String locator, Object... args) {
         switch (locatorType) {
             case "xpath":
                 $(byXpath(locatorFormatter(locator, args))).shouldBe(condition);
@@ -24,7 +27,6 @@ public class PageTools {
                 throw new IllegalArgumentException("Invalid locator type: " + locatorType);
         }
     }
-
     public void type(String locatorType, String text, String locator, Object... args) {
         switch (locatorType) {
             case "xpath":
@@ -37,7 +39,6 @@ public class PageTools {
                 throw new IllegalArgumentException("Invalid locator type: " + locatorType);
         }
     }
-
     public void click(String locatorType, String locator, Object... args) {
         switch (locatorType) {
             case "xpath":
@@ -50,7 +51,6 @@ public class PageTools {
                 throw new IllegalArgumentException("Invalid locator type: " + locatorType);
         }
     }
-
     public void shouldCollection(String locatorType, WebElementsCondition condition, String locator, Object... args) {
         switch (locatorType) {
             case "xpath":
@@ -63,7 +63,6 @@ public class PageTools {
                 throw new IllegalArgumentException("Invalid locator type: " + locatorType);
         }
     }
-
     public ElementsCollection getElements(String locatorType, String locator, Object... args) {
         switch (locatorType) {
             case "xpath":
