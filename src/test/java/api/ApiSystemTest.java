@@ -12,31 +12,41 @@ import java.time.LocalDateTime;
 
 public class ApiSystemTest {
 
-    @Test(description = "Verify that user can be created, authenticated and retrieved by token")
-    public void createAndGetUser() {
-//___________________CreatedUserTest_______________________
-        String username= TestDataForAPITests.generateUsername();
-        String password=TestDataForAPITests.DEFAULT_PASSWORD;
+    private static String username;
+    private static String password;
+    private static String accessToken;
 
-        CreateUserResponse createUser = ApiUserHelper.createUser(username,password);
+    @Test(groups = "api", description = "Verify that user can be created")
+    public void createUserTest() {
+        username = TestDataForAPITests.generateUsername();
+        password = TestDataForAPITests.DEFAULT_PASSWORD;
 
-        Assert.assertNotNull(createUser);
-        Assert.assertTrue(createUser.getCreated().isBefore(LocalDateTime.now()));
-        Assert.assertEquals(username, createUser.getUsername());
+        CreateUserResponse createUser = ApiUserHelper.createUser(username, password);
 
-//_______________AuthenticateUserTest_______________________
-        AuthResponse authResponse= ApiUserHelper.authenticateUser(username,password);
+        Assert.assertNotNull(createUser, "Create user response should not be null");
+        Assert.assertTrue(createUser.getCreated().isBefore(LocalDateTime.now()),
+                "Created time should be before current time");
+        Assert.assertEquals(username, createUser.getUsername(), "Username should match the created username in response");
+    }
 
-        Assert.assertNotNull(authResponse);
-        Assert.assertNotNull(authResponse.getAccess());
-        Assert.assertNotNull(authResponse.getRefresh());
+    @Test(groups = "api", dependsOnMethods = "createUserTest", description = "Verify that user can be authenticated")
+            public void authenticateUserTest() {
+        AuthResponse authResponse = ApiUserHelper.authenticateUser(username, password);
 
-//______________SuccessfullyAuthenticated_____________________
+        Assert.assertNotNull(authResponse, "Auth response should not be null");
+        Assert.assertNotNull(authResponse.getAccess(), "Access token should not be null");
+        Assert.assertNotNull(authResponse.getRefresh(), "Refresh token should not be null");
 
-        AuthMeResponse getUserResponse=ApiUserHelper.getUser(authResponse.getAccess());
+        accessToken = authResponse.getAccess();
+    }
+    @Test(groups = "api", dependsOnMethods = "authenticateUserTest", description = "Verify that authenticated user can be retrieved by token")
+            public void getUserByTokenTest() {
 
-        Assert.assertNotNull(getUserResponse);
-        Assert.assertEquals(username, getUserResponse.getUsername());
+        AuthMeResponse getUserResponse=ApiUserHelper.getUser(accessToken);
 
+        Assert.assertNotNull(getUserResponse,
+                "Get user response should not be null");
+        Assert.assertEquals(username, getUserResponse.getUsername(),
+                "Username should match the authenticated user");
     }
 }
