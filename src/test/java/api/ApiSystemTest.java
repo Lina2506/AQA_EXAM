@@ -16,7 +16,7 @@ public class ApiSystemTest {
     private static String password;
     private static String accessToken;
 
-    @Test(groups = "api", description = "Verify that user can be created")
+    @Test(groups = "api", priority = 1, description = "Verify that user can be created")
     public void createUserTest() {
         username = TestDataForAPITests.generateUsername();
         password = TestDataForAPITests.DEFAULT_PASSWORD;
@@ -29,8 +29,15 @@ public class ApiSystemTest {
         Assert.assertEquals(username, createUser.getUsername(), "Username should match the created username in response");
     }
 
-    @Test(groups = "api", dependsOnMethods = "createUserTest", description = "Verify that user can be authenticated")
+    @Test(groups = "api", priority = 2, dependsOnMethods = "createUserTest", description = "Verify that user can be authenticated")
             public void authenticateUserTest() {
+
+        if (username==null){
+            username = TestDataForAPITests.generateUsername();
+            password = TestDataForAPITests.DEFAULT_PASSWORD;
+            ApiUserHelper.createUser(username, password);
+        }
+
         AuthResponse authResponse = ApiUserHelper.authenticateUser(username, password);
 
         Assert.assertNotNull(authResponse, "Auth response should not be null");
@@ -39,8 +46,16 @@ public class ApiSystemTest {
 
         accessToken = authResponse.getAccess();
     }
-    @Test(groups = "api", dependsOnMethods = "authenticateUserTest", description = "Verify that authenticated user can be retrieved by token")
+    @Test(groups = "api", priority = 3, dependsOnMethods = "authenticateUserTest", description = "Verify that authenticated user can be retrieved by token")
             public void getUserByTokenTest() {
+
+        if (username==null || accessToken==null){
+            username = TestDataForAPITests.generateUsername();
+            password = TestDataForAPITests.DEFAULT_PASSWORD;
+            ApiUserHelper.createUser(username, password);
+            AuthResponse authResponse = ApiUserHelper.authenticateUser(username, password);
+            accessToken = authResponse.getAccess();
+        }
 
         AuthMeResponse getUserResponse=ApiUserHelper.getUser(accessToken);
 
