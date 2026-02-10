@@ -9,49 +9,74 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
+
 import static org.base.Pages.*;
 
 public class ExtendedTests extends BaseTests {
-    @Test(description = "Verify that the user can navigate through the website and successfully perform cart operations")
-    public void extendedTest() {
-//_________________NavigationMenu__________________________
+
+    private Product firstProduct;
+    private Product secondProduct;
+
+    @Test(groups = "extended", priority = 1, description = "Verify that contact window opens and displays correct title")
+    public void testContactWindowOpen() {
+
         homePage().clickContactButtonInNavigationMenu();
-        Selenide.sleep(2000);
 
-        Assert.assertEquals(contactWindow().getContactWindowTitle(),"New message");
+        Assert.assertEquals(contactWindow().getContactWindowTitle(), "New message", "Contact window title is correct");
         contactWindow().clickCloseButtonInContactWindow();
+    }
+    @Test(groups = "extended", priority = 2, description = "Verify that 'About us' window can be opened and closed")
+    public void testAboutUsWindow() {
 
-        homePage().clickAboutUsButtonInNavigationMenu();
-        Selenide.sleep(2000);
-        aboutUsWindow().clickCloseButtonInAboutUsWindow();
-//_________________CategoryValidation________________________
-        List<String> expectedCategories = List.of("Phones", "Laptops", "Monitors");
-        Assert.assertEquals(homePage().getCategoryNames(), expectedCategories);
-//_________________AddTwoProductsToCart____________________
-        List<Product>allProducts = homePage().getProductList();
+            homePage().clickAboutUsButtonInNavigationMenu();
+            aboutUsWindow().clickCloseButtonInAboutUsWindow();
+        }
+    @Test(groups = "extended", priority = 3, description = "Verify that all expected categories are displayed")
+    public void testCategoryValidation() {
+
+            List<String> expectedCategories = List.of("Phones", "Laptops", "Monitors");
+            List<String> actualCategories = homePage().getCategoryNames();
+            Assert.assertEquals(actualCategories, expectedCategories, "Categories matched");
+        }
+    @Test(groups = {"extended", "stateful"}, priority = 4, description = "Verify that user can add a few products to cart")
+    public void testAddFewProductsToCart() {
+        List<Product> allProducts = homePage().getProductList();
 
         homePage().clickOnProductByName("Samsung galaxy s6");
-        Product firstProduct = detailProductPage().getDetailProduct();
-        Assert.assertTrue(allProducts.contains(firstProduct), "List"+ allProducts + " doesn't contain " + firstProduct);
+        firstProduct = detailProductPage().getDetailProduct();
+        Assert.assertTrue(allProducts.contains(firstProduct), "List" + allProducts + " doesn't contain " + firstProduct);
         productPage().clickAddToCartButton();
-        Assert.assertEquals(AlertDialogs.getAlertText(),"Product added");
+        Assert.assertEquals(AlertDialogs.getAlertText(), "Product added", "Alert text is correct");
+        AlertDialogs.acceptAlert();
 
         homePage().clickHomeButtonInNavigationMenu();
 
         homePage().clickOnProductByName("Nexus 6");
-        Product secondProduct = detailProductPage().getDetailProduct();
-        Assert.assertTrue(allProducts.contains(secondProduct), "List"+ allProducts + " doesn't contain " + secondProduct);
+        secondProduct = detailProductPage().getDetailProduct();
+        Assert.assertTrue(allProducts.contains(secondProduct), "List" + allProducts + " doesn't contain " + secondProduct);
         productPage().clickAddToCartButton();
-        Assert.assertEquals(AlertDialogs.getAlertText(),"Product added");
+
+        Assert.assertEquals(AlertDialogs.getAlertText(), "Product added", "Alert text is correct");
+        AlertDialogs.acceptAlert();
 
         homePage().clickCartButtonInNavigationMenu();
-//______________________CheckTotalSum______________________
-        int expectedSum=firstProduct.getPrice()+secondProduct.getPrice();
-        int actualSum= cartPage().getTotalPrice();
+
+        List<String> cartProductNames=cartPage().getProductNames().texts();
+        Assert.assertTrue(cartProductNames.contains(firstProduct.getName()), "Cart should contain " + firstProduct.getName());
+        Assert.assertTrue(cartProductNames.contains(secondProduct.getName()), "Cart should contain " + secondProduct.getName());
+    }
+    @Test(groups = {"extended", "stateful"}, priority = 5, dependsOnMethods = {"testAddFewProductsToCart"}, description = "Verify that total sum in cart is calculated correctly")
+            public void testTotalSumInCart() {
+        homePage().clickCartButtonInNavigationMenu();
+        int expectedSum = firstProduct.getPrice() + secondProduct.getPrice();
+        int actualSum = cartPage().getTotalPrice();
         Assert.assertEquals(actualSum, expectedSum, "Total sum in cart is incorrect");
-//______________________DeleteOneProduct____________________
-        cartPage().deleteProductByName(firstProduct.getName());
-        Selenide.sleep(2000);
+    }
+
+    @Test(groups = {"extended", "stateful"}, priority = 6, dependsOnMethods = {"testTotalSumInCart"},description = "Verify that product can be deleted from cart and total sum recalculated")
+            public void testDeleteProductFromCart() {
+    homePage().clickCartButtonInNavigationMenu();
+    cartPage().deleteProductByName(firstProduct.getName());
         int remainingTotal=cartPage().getTotalPrice();
         Assert.assertEquals(remainingTotal, secondProduct.getPrice(), "Total sum in cart is incorrect");
 //___________________ReturnHomePage____________________________

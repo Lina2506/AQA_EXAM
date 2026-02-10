@@ -4,6 +4,7 @@ import com.codeborne.selenide.*;
 import org.base.config.PageTools;
 import org.base.models.Product;
 
+import java.time.Duration;
 import java.util.*;
 
 import static com.codeborne.selenide.Condition.*;
@@ -59,9 +60,17 @@ public class HomePage extends PageTools {
         click("css", cartButtonInNavigationMenu);
     }
     public void clickLogOutButtonInNavigationMenu() {
-        getElement("css", logOutButtonInNavigationMenu)
-                .shouldBe(Condition.interactable)
-                .click();
+        SelenideElement logOutButton = getElement("css", logOutButtonInNavigationMenu);
+        logOutButton.shouldBe(visible, Duration.ofSeconds(10));
+
+        try{
+            logOutButton.shouldBe(interactable, Duration.ofSeconds(10));
+            logOutButton.scrollTo();
+            logOutButton.click();
+        } catch (Exception e){
+            System.out.println("Standard click failed, using JavaScript click...");
+            Selenide.executeJavaScript("arguments[0].click();", logOutButton);
+        }
     }
     public ElementsCollection getCategories() {
         return getElements("xpath", categoriesLocator);
@@ -75,18 +84,27 @@ public class HomePage extends PageTools {
     public List<Product>getProductList(){
         List<Product> productList=new ArrayList<>();
 
-        List<String>namesList=getElementsText("xpath", productNames);
-        List<String>pricesList=getElementsText("xpath", productPrices);
-        List<String>descriptionsList=getElementsText("xpath", productDescriptions);
+        shouldCollection("xpath", CollectionCondition.size(9), productNames);
+        shouldCollection("xpath", CollectionCondition.size(9), productPrices);
+        shouldCollection("xpath", CollectionCondition.size(9), productDescriptions);
 
-        for (int i = 0; i < namesList.size(); i++) {
-             Product product=new Product();
+        ElementsCollection names = getElements("xpath", productNames);
+        ElementsCollection prices = getElements("xpath", productPrices);
+        ElementsCollection descriptions = getElements("xpath", productDescriptions);
 
-             product.setName(namesList.get(i));
-             product.setPrice(Integer.parseInt(pricesList.get(i).replace("$", "").trim()));
-             product.setDescription(descriptionsList.get(i));
+        // Чекаємо поки всі елементи стануть видимими
+        names.first().shouldBe(visible, Duration.ofSeconds(5));
+        prices.first().shouldBe(visible, Duration.ofSeconds(5));
+        descriptions.first().shouldBe(visible, Duration.ofSeconds(5));
 
-        productList.add(product);
+        for (int i = 0; i < names.size(); i++) {
+            Product product = new Product();
+
+            product.setName(names.get(i).text());
+            product.setPrice(Integer.parseInt(prices.get(i).text().replace("$", "").trim()));
+            product.setDescription(descriptions.get(i).text());
+
+            productList.add(product);
         }
         return productList;
     }

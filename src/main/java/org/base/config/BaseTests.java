@@ -4,6 +4,7 @@ import com.codeborne.selenide.*;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import com.codeborne.selenide.testng.TextReport;
 import io.qameta.allure.selenide.AllureSelenide;
+import org.testng.ITestResult;
 import org.testng.annotations.*;
 
 import static org.base.helpers.Constants.*;
@@ -32,7 +33,15 @@ public class BaseTests {
     }
     //реєстрація юзера
     @AfterMethod
-    public void clearWebDriver() {
+    public void clearWebDriver(ITestResult result) {
+
+        String[] groups=result.getMethod().getGroups();
+        for(String group : groups){
+            if ("stateful".equals(group)){
+                return;
+            }
+        }
+
       Selenide.clearBrowserCookies();
       Selenide.clearBrowserLocalStorage();
       Selenide.refresh();
