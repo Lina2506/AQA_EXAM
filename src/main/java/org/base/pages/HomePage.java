@@ -44,11 +44,10 @@ public class HomePage extends PageTools {
         should("css", clickable, logInButtonInNavigationMenu);
         click("css", logInButtonInNavigationMenu);
     }
-    public void assertLoginButtonVisible() {
-        should("css", visible, logInButtonInNavigationMenu);
+    public SelenideElement getLogInButton(){
+        return getElement("css", logInButtonInNavigationMenu);
     }
     public ElementsCollection getProducts(){
-        shouldCollection("xpath", CollectionCondition.size(9), productNames);
         return getElements("xpath", productNames);
     }
     public void clickOnProductByName(String productName) {
@@ -77,25 +76,15 @@ public class HomePage extends PageTools {
     }
 
     public List<String> getCategoryNames() {
-        shouldCollection("xpath", CollectionCondition.sizeGreaterThan(0), categoriesLocator);
         return getCategories().texts();
     }
 
     public List<Product>getProductList(){
         List<Product> productList=new ArrayList<>();
 
-        shouldCollection("xpath", CollectionCondition.size(9), productNames);
-        shouldCollection("xpath", CollectionCondition.size(9), productPrices);
-        shouldCollection("xpath", CollectionCondition.size(9), productDescriptions);
-
         ElementsCollection names = getElements("xpath", productNames);
         ElementsCollection prices = getElements("xpath", productPrices);
         ElementsCollection descriptions = getElements("xpath", productDescriptions);
-
-        // Чекаємо поки всі елементи стануть видимими
-        names.first().shouldBe(visible, Duration.ofSeconds(5));
-        prices.first().shouldBe(visible, Duration.ofSeconds(5));
-        descriptions.first().shouldBe(visible, Duration.ofSeconds(5));
 
         for (int i = 0; i < names.size(); i++) {
             Product product = new Product();

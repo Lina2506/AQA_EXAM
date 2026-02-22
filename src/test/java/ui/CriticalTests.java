@@ -6,11 +6,13 @@ import org.base.models.Product;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.time.Duration;
 import java.util.List;
 
 import static org.base.Pages.*;
 import static org.base.helpers.Constants.*;
 import static org.base.helpers.TestDataForUITests.*;
+import static com.codeborne.selenide.Condition.visible;
 
 public class CriticalTests extends BaseTests {
     @Test(groups = "critical", priority = 1, description = "Verify user is able to sign up")
@@ -30,7 +32,7 @@ public class CriticalTests extends BaseTests {
     @Test (groups = "critical", priority = 2, description = "Verify user is able to login")
             public void testLogIn() {
         homePage().clickLogInButtonInNavigationMenu();
-        homePage().assertLoginButtonVisible();
+        homePage().getLogInButton().shouldBe(visible, Duration.ofSeconds(10));
 
         logInPage().typeLoginUsername(LOGIN_USERNAME);
         logInPage().typeLoginPassword(LOGIN_PASSWORD);
@@ -92,8 +94,6 @@ public class CriticalTests extends BaseTests {
     orderPage().typeOrderYearInput(ORDER_YEAR);
     orderPage().clickPurchaseButton();
 
-//    Selenide.sleep(5000);
-
     String expectedMessage = "Thank you for your purchase!";
     String actualMessage = orderNotification().getCompleteHeaderText();
 
@@ -103,6 +103,6 @@ public class CriticalTests extends BaseTests {
 
 //_______________________LogOut_____________________________________
         homePage().clickLogOutButtonInNavigationMenu();
-        homePage().assertLoginButtonVisible();
+        homePage().getLogInButton().shouldBe(visible, Duration.ofSeconds(10));
     }
 }

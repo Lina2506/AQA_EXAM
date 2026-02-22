@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.*;
-import org.base.helpers.dataDeserializer.DataDeserializer;
+import org.base.helpers.datadeserializer.DataDeserializer;
 
 import java.time.LocalDateTime;
 

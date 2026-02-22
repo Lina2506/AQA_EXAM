@@ -15,21 +15,13 @@ public class CartPage extends PageTools {
     private String placeOrderButton="//button[text()='Place Order']";
 
     public ElementsCollection getProductNames() {
-        shouldCollection("xpath", CollectionCondition.sizeGreaterThan(0), productNames);
         return getElements("xpath", productNames);
     }
 
     public int getTotalPrice() {
-
-        shouldCollection("xpath", CollectionCondition.sizeGreaterThan(0), productNames);
         SelenideElement totalElement=getElement("xpath", totalPrice);
         totalElement.shouldBe(visible, Duration.ofSeconds(15));
-
-        totalElement.shouldNotBe(exactText(""), Duration.ofSeconds(10));
-
-        String totalText=totalElement.getText().trim();
-        String cleanText=totalText.replaceAll("[^0-9]","");
-        return Integer.parseInt(cleanText);
+        return Integer.parseInt(totalElement.getText().trim().replaceAll("[^0-9]",""));
     }
     public void deleteProductByName(String productName) {
         ElementsCollection names = getProductNames();

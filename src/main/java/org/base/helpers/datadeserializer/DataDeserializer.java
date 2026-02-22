@@ -1,8 +1,7 @@
-package org.base.helpers.dataDeserializer;
+package org.base.helpers.datadeserializer;
 
 import com.fasterxml.jackson.core.*;
 import com.fasterxml.jackson.databind.*;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import java.io.IOException;
 import java.time.LocalDateTime;

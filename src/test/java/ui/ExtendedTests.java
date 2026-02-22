@@ -1,12 +1,13 @@
 package ui;
 
-import com.codeborne.selenide.Selenide;
+import com.codeborne.selenide.CollectionCondition;
 import org.base.config.BaseTests;
 import org.base.helpers.AlertDialogs;
 import org.base.models.Product;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.time.Duration;
 import java.util.List;
 
 
@@ -36,11 +37,14 @@ public class ExtendedTests extends BaseTests {
 
             List<String> expectedCategories = List.of("Phones", "Laptops", "Monitors");
             List<String> actualCategories = homePage().getCategoryNames();
+            Assert.assertEquals(actualCategories.size(), 3, "Categories count should be 3");
             Assert.assertEquals(actualCategories, expectedCategories, "Categories matched");
         }
     @Test(groups = {"extended", "stateful"}, priority = 4, description = "Verify that user can add a few products to cart")
     public void testAddFewProductsToCart() {
+        homePage().getProducts().shouldHave(CollectionCondition.size(9));
         List<Product> allProducts = homePage().getProductList();
+        Assert.assertEquals(allProducts.size(), 9, "Expected 9 products on Home page");
 
         homePage().clickOnProductByName("Samsung galaxy s6");
         firstProduct = detailProductPage().getDetailProduct();
@@ -61,6 +65,7 @@ public class ExtendedTests extends BaseTests {
 
         homePage().clickCartButtonInNavigationMenu();
 
+        cartPage().getProductNames().shouldBe(CollectionCondition.sizeGreaterThan(0), Duration.ofSeconds(10));
         List<String> cartProductNames=cartPage().getProductNames().texts();
         Assert.assertTrue(cartProductNames.contains(firstProduct.getName()), "Cart should contain " + firstProduct.getName());
         Assert.assertTrue(cartProductNames.contains(secondProduct.getName()), "Cart should contain " + secondProduct.getName());
