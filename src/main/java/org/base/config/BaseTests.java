@@ -11,11 +11,10 @@ import static org.base.helpers.Constants.*;
 
 @Listeners(TextReport.class)
 public class BaseTests {
-    @BeforeTest
+    @BeforeTest(alwaysRun = true)
     public void config() {
         Configuration.browser = "chrome";
         Configuration.browserSize = "1024x768";
-        Configuration.holdBrowserOpen = false;
         Configuration.headless = false;
         Configuration.timeout = 10000;
         Configuration.savePageSource = false;
@@ -27,12 +26,11 @@ public class BaseTests {
                 .includeSelenideSteps(true)
         );
     }
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void openMainPage(){
         Selenide.open(BASE_URL);
     }
-    //реєстрація юзера
-    @AfterMethod
+    @AfterMethod(alwaysRun = true)
     public void clearWebDriver(ITestResult result) {
 
         String[] groups=result.getMethod().getGroups();
@@ -47,7 +45,7 @@ public class BaseTests {
       Selenide.refresh();
     }
 
-    @AfterTest
+    @AfterTest(alwaysRun = true)
     public void tearDown() {
         Selenide.closeWebDriver();
     }

@@ -9,8 +9,6 @@ import org.testng.annotations.Test;
 
 import java.time.Duration;
 import java.util.List;
-
-
 import static org.base.Pages.*;
 
 public class ExtendedTests extends BaseTests {
@@ -82,6 +80,7 @@ public class ExtendedTests extends BaseTests {
             public void testDeleteProductFromCart() {
     homePage().clickCartButtonInNavigationMenu();
     cartPage().deleteProductByName(firstProduct.getName());
+
         int remainingTotal=cartPage().getTotalPrice();
         Assert.assertEquals(remainingTotal, secondProduct.getPrice(), "Total sum in cart is incorrect");
 //___________________ReturnHomePage____________________________

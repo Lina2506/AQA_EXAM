@@ -6,5 +6,5 @@ public class TestDataForUITests {
     public static String generateUserName() {
         return "PolinaTest-"+ UUID.randomUUID();
     }
-    public static final String DEFAULT_PASSWORD = "Polina_test";
+    public static final String DEFAULT_PASSWORD = "Aqa12345!";
 }

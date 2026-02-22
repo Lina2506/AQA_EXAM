@@ -10,4 +10,6 @@ public class Constants {
     public static final String ORDER_CREDITCARD="12345678";
     public static final String ORDER_MONTH="september";
     public static final String ORDER_YEAR="2025";
+
+    public static final int DEFAULT_PRODUCT_INDEX = 2;
 }
