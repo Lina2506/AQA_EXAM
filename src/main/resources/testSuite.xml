@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="AQA_EXAM suite">
+<suite name="aqa-exam suite">
     <!--Critical Tests Suite-->
     <test name="Critical UI Tests" preserve-order="true">
         <groups>
