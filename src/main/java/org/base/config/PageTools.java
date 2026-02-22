@@ -30,10 +30,10 @@ public class PageTools {
     public void type(String locatorType, String text, String locator, Object... args) {
         switch (locatorType) {
             case "xpath":
-                $(byXpath(locatorFormatter(locator, args))).append(text);
+                $(byXpath(locatorFormatter(locator, args))).setValue(text);
                 break;
             case "css":
-                $(byCssSelector(locatorFormatter(locator, args))).append(text);
+                $(byCssSelector(locatorFormatter(locator, args))).setValue(text);
                 break;
             default:
                 throw new IllegalArgumentException("Invalid locator type: " + locatorType);
